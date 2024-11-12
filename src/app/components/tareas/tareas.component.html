@@ -1,1 +1,34 @@
-<p>tareas works!</p>
+<h2>Agregar Tarea</h2>
+
+<div class="formulario-contenedor">
+    <form (ngSubmit)="agregarTarea()">
+      <fieldset>
+        <label for="nombre-tarea">Nombre del tarea:</label>
+        <input type="text" [(ngModel)]="nombreTarea" name="nombreTarea" required>
+        <br>
+        <label for="descripcion-tarea">Descripción de la Tarea:</label>
+        <input type="text" [(ngModel)]="descripcionTarea" name="descripcionTarea" required>
+        <br>
+      </fieldset>
+      <button type="submit">Agregar tarea</button>
+    </form>
+  </div>
+
+  <div class="contenedor-tareas">
+    <h2>Lista de Tareas</h2>
+    <ul id="lista-tareas">
+      <li *ngFor="let tarea of tareas">
+        <div class="informacion-tarea">
+          <h2>{{ tarea.nombreTarea }}</h2>
+        </div>
+        <div>
+          <p><strong>Descripción:</strong> {{ tarea.descripcionTarea }}</p>
+          <button (click)="toggleDetalles(tarea.id)">Ver más</button>
+          <button (click)="eliminarTarea(tarea.id)">Eliminar</button>
+        </div>
+
+        <!-- Mostrar detalles de la tarea seleccionada en su propio div -->
+        <app-detalle-tarea *ngIf="idTareaSeleccionada === tarea.id" [tarea]="tarea"></app-detalle-tarea>
+      </li>
+    </ul>
+</div>
