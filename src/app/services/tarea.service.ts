@@ -10,19 +10,19 @@ export class TareaService {
 
   constructor(private firestore: Firestore) {}
 
-  // Guardar una nueva tarea en Firestore
+  // Guardar nueva tarea
   guardarTarea(tarea: any) {
     const tareasCollection = collection(this.firestore, 'tareas');
     return addDoc(tareasCollection, tarea);
   }
 
-  // Eliminar una tarea por su ID en Firestore
+  // Eliminar tarea
   eliminarTarea(id: string) {
     const tareaDoc = doc(this.firestore, `tareas/${id}`);
     return deleteDoc(tareaDoc);
   }
 
-  // Obtener todas las tareas desde Firestore
+  // Obtener tareas
   obtenerTareas(): Observable<any[]> {
     const tareasCollection = collection(this.firestore, 'tareas');
     return collectionData(tareasCollection, { idField: 'id' }) as Observable<any[]>;
